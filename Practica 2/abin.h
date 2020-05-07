@@ -13,8 +13,8 @@ public:
 	void insertarRaiz(const T& e);
 	void insertarHijoIzqdo(nodo n, const T& e);
 	void insertarHijoDrcho(nodo n, const T& e);
-	void eliminarHijoIzqdo(nodo n);
-	void eliminarHijoDrcho(nodo n);
+	void eliminarHijoIzqdo(nodo n, const T& e);
+	void eliminarHijoDrcho(nodo n, const T& e);
 	void eliminarRaiz();
 	bool arbolVacio() const;
 	const T& elemento(nodo n) const; // acceso a elto, lectura
