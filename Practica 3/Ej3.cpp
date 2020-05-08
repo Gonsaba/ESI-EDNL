@@ -13,7 +13,7 @@ int max(int a, int b)
 		return a;
 }
 
-int altura(const Agen<T>& A, const Agen<T>::nodo n)
+int altura(const Agen<T>& A, typename Agen<T>::nodo n)
 {
 	int max = 0;
 	if(A.hijoIzqdo(n) == Agen<T>::NODO_NULO)
@@ -34,7 +34,7 @@ int altura(const Agen<T>& A, const Agen<T>::nodo n)
 	}
 }
 
-int desequilibrioRec(const Agen<T>& A, const Agen<T>::nodo n)
+int desequilibrioRec(const Agen<T>& A, typename Agen<T>::nodo n)
 {
 	if(A.hijoIzqdo(n) == Agen<T>::NODO_NULO)
 	{
