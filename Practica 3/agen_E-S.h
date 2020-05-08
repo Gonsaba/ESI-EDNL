@@ -114,7 +114,7 @@ template <typename T>
 void imprimirDescendientes(typename Agen<T>::nodo n, const Agen<T>& A)
 // Post: Muestra los descendientes de n en la salida estándar.
 {
-   if (A.hijoIzqdo(n) != Agen<T>::NODO_NULO)
+   if(A.hijoIzqdo(n) != Agen<T>::NODO_NULO)
    {
       typename Agen<T>::nodo hijo = A.hijoIzqdo(n);
       cout << "Hijo izqdo de " << A.elemento(n) << ": "
