@@ -127,3 +127,32 @@ inline const Abb<T>& Abb<T>::drcho() const
 	assert(r != nullptr);
 	return r->der;
 }
+
+template <typename T>
+inline Abb<T>::Abb(const Abb<T>& A): r{nullptr}
+{
+	if (A.r != nullptr)
+	r = new arbol(*A.r); // Copiar raíz y descendientes.
+}
+
+template <typename T>
+Abb<T>& Abb<T>::operator =(const Abb<T>& A)
+{
+	if (this != &A) { // Evitar autoasignación.
+		this->~Abb(); // Vaciar el árbol.
+		if (A.r != nullptr)
+		r = new arbol(*A.r); // Copiar raíz y descendientes.
+	}
+	return *this;
+}
+
+template <typename T>
+Abb<T>::~Abb()
+{
+	if (r != nullptr) { // Árbol no vacío.
+		delete r; // Destruir raíz y descendientes con r->~arbol()
+		r = nullptr; // El árbol queda vacío.
+	}
+}
+
+#endif // ABB_H

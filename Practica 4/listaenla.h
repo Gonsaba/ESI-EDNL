@@ -1,9 +1,8 @@
-#ifndef LISTA_DOBLE_H
-#define LISTA_DOBLE_H
+#ifndef LISTA_ENLA_H
+#define LISTA_ENLA_H
 #include <cassert>
 
-template <typename T> class Lista
-{
+template <typename T> class Lista {
     struct nodo;
 public:
     typedef nodo* posicion;
@@ -21,11 +20,10 @@ public:
     posicion fin() const;
     ~Lista();
 private:
-    struct nodo
-    {
+    struct nodo{
         T elto;
-        nodo *ant,*sig;
-        nodo(T e,nodo* a = 0,nodo* s = 0) : elto(e), sig(a), ant(s){}
+        nodo* sig;
+        nodo(T e,nodo* p = 0) : elto(e), sig(p){}
     };
 
     nodo* L;
@@ -37,20 +35,22 @@ template <typename T>
 void Lista<T>::copiar(const Lista<T> &l)
 {
     L = new nodo(T());
-    L->ant = L->sig = L;
-    for(nodo* q = l.L->sig; q != l.L; q = q->sig)
-        L->ant = L->ant->sig = new nodo(q->elto, L->ant, l);
-} 
-
-template <typename T>
-inline Lista<T>::Lista() : L(new nodo(T()))
-{
-    L->ant = L->sig = L;
+    nodo* q = L;
+    for(nodo* r = l.L->sig; r; r = r->sig)
+    {
+        q->sig = new nodo(r->elto);
+        q = q->sig;
+    }
 }
 
 template <typename T>
+inline Lista<T>::Lista() : L(new nodo(T())) {}
+
+template <typename T>
 inline Lista<T>::Lista(const Lista<T>& l)
-{ copiar(l); }
+{
+    copiar(l);
+}
 
 template <typename T>
 Lista<T>& Lista<T>::operator =(const Lista<T>& l)
@@ -64,32 +64,31 @@ Lista<T>& Lista<T>::operator =(const Lista<T>& l)
 }
 
 template <typename T>
-void Lista<T>::insertar(const T& x, Lista<T>::posicion p)
+void Lista<T>::insertar(const T& x,Lista<T>::posicion p)
 {
-    p->sig = p->sig->ant = new nodo(x,p->sig);
+    p->sig = new nodo(x, p->sig);
 }
 
 template <typename T>
-inline void Lista<T>::eliminar(Lista<T>::posicion p)
+void Lista<T>::eliminar(Lista<T>::posicion p)
 {
-    assert(p->sig != L);
+    assert(p->sig);
     nodo* q = p->sig;
     p->sig = q->sig;
-    p->sig->ant = p;
-    delete p;
+    delete q;
 }
 
 template <typename T> inline
 const T& Lista<T>::elemento(Lista<T>::posicion p) const
 {
-    assert(p->sig != L);
+    assert(p->sig);
     return p->sig->elto;
 }
 
 template <typename T>
 inline T& Lista<T>::elemento(Lista<T>::posicion p)
 {
-    assert(p->sig != L);
+    assert(p->sig);
     return p->sig->elto;
 }
 
@@ -98,7 +97,7 @@ typename Lista<T>::posicion Lista<T>::buscar(const T& x) const
 {
     nodo* q = L;
     bool encontrado = false;
-    while(q->sig != L && !encontrado)
+    while(q->sig && !encontrado)
     {
         if(q->sig->elto == x)
             encontrado = true;
@@ -108,17 +107,20 @@ typename Lista<T>::posicion Lista<T>::buscar(const T& x) const
 }
 
 template <typename T>
-typename Lista<T>::posicion Lista<T>::siguiente(Lista<T>::posicion p)const
+typename Lista<T>::posicion Lista<T>::siguiente(Lista<T>::posicion p) const
 {
-    assert(p->sig != L);
+    assert(p->sig);
     return p->sig;
 }
 
-template <typename T> inline
+template <typename T>
 typename Lista<T>::posicion Lista<T>::anterior(Lista<T>::posicion p) const
 {
+    nodo* q;
+
     assert(p != L);
-    return p->ant;
+    for(q = L; q->sig != p; q = q->sig);
+    return q;
 }
 
 template <typename T>
@@ -128,22 +130,22 @@ inline typename Lista<T>::posicion Lista<T>::primera() const
 }
 
 template <typename T>
-inline typename Lista<T>::posicion Lista<T>::fin() const
+typename Lista<T>::posicion Lista<T>::fin() const
 {
-    return L->ant;
+    nodo* p;
+    for(p = L; p->sig; p = p->sig);
+    return p;
 }
 
-template <typename T>
-Lista<T>::~Lista()
+template <typename T> Lista<T>::~Lista()
 {
     nodo* q;
-    while(L->sig != L)
+    while(L)
     {
         q = L->sig;
-        L->sig = q->sig;
-        delete q;
+        delete L;
+        L = q;
     }
-    delete L;
 }
 
 #endif
