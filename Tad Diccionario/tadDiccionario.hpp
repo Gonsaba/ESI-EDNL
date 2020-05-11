@@ -20,7 +20,7 @@ public:
 private:
     Abb<Par> diccionario_;
     void listarRec(const Abb<Par>& subDic) const;
-    std::string buscarRec(std::string zeu, const Abb<Par>& subDic) const;
+    Abb<Par> buscarRec(std::string zeu, const Abb<Par>& subDic) const;
 };
 
 #endif

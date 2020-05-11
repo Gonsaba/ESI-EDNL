@@ -8,5 +8,5 @@ int main()
     d.insertar("adios","pene");
     d.insertar("maricon","gay");
 
-    std::cout<<d.buscar("tusmuertos")<<std::endl;
+    std::cout<<d.buscar("pene")<<std::endl;
 }

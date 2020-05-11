@@ -46,36 +46,28 @@ void Diccionario::eliminar(std::string esp)
 std::string Diccionario::buscar(std::string zeu) const
 {
     std::string a,b;
-    if(diccionario_.vacio())
-        return "";
-    else if(diccionario_.elemento().second == zeu)
+    Abb<Diccionario::Par> A = buscarRec(zeu,diccionario_);
+    if(A.vacio())
+        return "Traducción no encontrada";
+    else 
         return diccionario_.elemento().first;
-    else
-    {
-        a = buscarRec(zeu,diccionario_.izqdo());
-        b = buscarRec(zeu,diccionario_.izqdo());
-        if(a != "")
-            return a;
-        else if(b != "")
-            return b;
-    }
-
 }
 
-std::string Diccionario::buscarRec(std::string zeu, const Abb<Par>& subDic) const
+Abb<Diccionario::Par> Diccionario::buscarRec(std::string zeu, const Abb<Par>& subDic) const
 {
     std::string a,b;
+    Abb<Diccionario::Par> izq,der;
     if(subDic.vacio())
-        return "";
+        return subDic;
     else if(diccionario_.elemento().second == zeu)
-        return diccionario_.elemento().first;
+        return subDic;
     else
     {
-        a = buscarRec(zeu,diccionario_.izqdo());
-        b = buscarRec(zeu,diccionario_.izqdo());
-        if(a != "")
-            return a;
-        else if(b != "")
-            return b;
+        if(!izq.vacio())
+            return izq;
+        else if(!der.vacio())
+            return der;
+        else
+            return izq;
     }
 }
