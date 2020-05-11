@@ -29,7 +29,8 @@ int main(){
 	imprimirAbb(A);
 	std::cout<<"Rama a eliminar:";
 	std::cin>>a;
-	eliminarRama(A,a);
+	A.eliminar(a);
+	//eliminarRama(A,a);
 	std::cout<<std::endl;
 	imprimirAbb(A);
 }

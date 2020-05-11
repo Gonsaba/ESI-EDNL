@@ -5,15 +5,15 @@
 
 typedef int T;
 
-void colaArbolInordenAbb(Abb<T> A,Cola<T>& elementos,int& nElementos)
+void colaArbolInordenAbb(Abb<T> A,Cola<T>& elementos)
 {
 	if(!A.izqdo().vacio())
-		colaArbolInordenAbb(A.izqdo(),elementos,nElementos);
+		colaArbolInordenAbb(A.izqdo(),elementos);
 
 	elementos.push(A.elemento());
 	
 	if(!A.drcho().vacio())
-		colaArbolInordenAbb(A.drcho(),elementos,nElementos);
+		colaArbolInordenAbb(A.drcho(),elementos);
 }
 
 void procesarEquilibrarAbb(Abb<T>& A,Cola<T>& elementos,int& nElementos)
@@ -77,12 +77,14 @@ Cola<T> unionColas(Cola<T>& elementosA, Cola<T>& elementosB, int& nElementos)
 	{
 		elementos.push(elementosA.frente());
 		elementosA.pop();
+		nElementos++;
 	}
 
 	while(!elementosB.vacia())
 	{
 		elementos.push(elementosB.frente());
 		elementosB.pop();
+		nElementos++;
 	}
 
 	return elementos;
@@ -116,11 +118,10 @@ Abb<T> equilibrarAbbUnion(Abb<T>& A, Abb<T>& B)
 		int nElementos = 0;
 		Cola<T> elementosA,elementosB,elementos;
 		
-		colaArbolInordenAbb(A,elementosA,nElementos);
-		colaArbolInordenAbb(B,elementosB,nElementos);
+		colaArbolInordenAbb(A,elementosA);
+		colaArbolInordenAbb(B,elementosB);
 
 		elementos = unionColas(elementosA,elementosB,nElementos);
-		//elementos = interseccionColas(elementosA,elementosB,nElementos);
 
 		procesarEquilibrarAbb(Res,elementos,nElementos);
 	}
@@ -135,20 +136,40 @@ Abb<T> equilibrarAbbInterseccion(Abb<T>& A, Abb<T>& B)
 		int nElementos = 0;
 		Cola<T> elementosA,elementosB,elementos;
 		
-		colaArbolInordenAbb(A,elementosA,nElementos);
-		colaArbolInordenAbb(B,elementosB,nElementos);
+		colaArbolInordenAbb(A,elementosA);
+		colaArbolInordenAbb(B,elementosB);
 
 		elementos = interseccionColas(elementosA,elementosB,nElementos);
-		//elementos = interseccionColas(elementosA,elementosB,nElementos);
 
 		procesarEquilibrarAbb(Res,elementos,nElementos);
 	}
 	return Res;
 }
 
+Abb<T> operator -(Abb<T>& A, Abb<T>& B)
+{
+	Abb<T> Res = A;
+	Cola<T> c;
+	colaArbolInordenAbb(B,c);
+	while(!c.vacia())
+	{
+		Res.eliminar(c.frente());
+		c.pop();
+	}
+	return Res;
+}
+
+Abb<T> operator &(Abb<T>& A, Abb<T>& B)
+{
+	Abb<T> C = equilibrarAbbUnion(A,B);
+	Abb<T> D = equilibrarAbbInterseccion(A,B);
+	Abb<T> Res = C - D;
+	return Res;
+}
+
 int main(){
 	Abb<T> A,B,C;
-	T vecA[] = {7,5,12,9,17,8,11,10};
+	T vecA[] = {7,5,12,200,17,8,11,10};
 	T vecB[] = {7,5,12,9,17,8,11,10};
 	unsigned tamA = sizeof(vecA)/sizeof(T);
 	unsigned tamB = sizeof(vecB)/sizeof(T);
@@ -156,7 +177,7 @@ int main(){
 		A.insertar(vecA[i]);
 	for(unsigned i = 0; i < tamB; ++i)
 		B.insertar(vecB[i]);
-	C = equilibrarAbbUnion(A,B);
+	C = A & B;
 	imprimirAbb(C);
 	/*C = equilibrarAbbInterseccion(A,B);
 	imprimirAbb(C);*/
