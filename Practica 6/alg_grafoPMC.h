@@ -128,6 +128,51 @@ vector<tCoste> Dijkstra(const GrafoP<tCoste>& G,
    return D;
 }
 
+template <typename tCoste>
+vector<tCoste> DijkstraInv(const GrafoP<tCoste>& G,
+                        typename GrafoP<tCoste>::vertice destino,
+                        vector<typename GrafoP<tCoste>::vertice>& P)
+{
+   typedef typename GrafoP<tCoste>::vertice vertice;
+
+   const size_t n = G.numVert();
+   vector<bool> S(n, false);                 
+   vector<tCoste> D(n);                         
+
+   P = vector<vertice>(n, destino);
+
+   for(int i = 0; i < n; i++){
+      D[i] = G[i][destino];
+   }
+
+   D[destino] = 0;
+
+   S[destino] = true;
+
+   for(int k = 0; k < n-2; k++){
+      tCoste costemin = GrafoP<tCoste>::INFINITO;
+      typename GrafoP<tCoste>::vertice v;
+      for(int i = 0; i < n; i++){
+         if(D[i] < costemin && !S[i]){
+            costemin = D[i];
+            v = i;
+         }
+      }      
+   
+      S[v] = true;
+
+      for(int i = 0; i < n; i++){
+         tCoste ivd;
+         ivd = suma(G[i][v],D[v]);
+         if(ivd < D[i]){
+            D[i] = ivd;
+            P[i] = v;
+         }
+      }
+   }
+   return D;
+}
+
 template <typename tCoste> typename GrafoP<tCoste>::tCamino
 camino(typename GrafoP<tCoste>::vertice orig,
        typename GrafoP<tCoste>::vertice v,
