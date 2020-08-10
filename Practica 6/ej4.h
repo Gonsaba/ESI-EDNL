@@ -9,7 +9,7 @@ typedef struct
     GrafoP<double>::vertice cB;
 } caminos;
 
-matriz<double> costeZuelandia(GrafoP<double> G,vector<bool> ciudadesR,vector<caminos> caminoR, GrafoP<double>::vertice cap){
+matriz<double> costeZuelandia(GrafoP<double> &G,vector<bool> &ciudadesR,vector<caminos> &caminoR, GrafoP<double>::vertice cap){
     matriz<double> costes;
     matriz<GrafoP<double>::vertice> c;
     
