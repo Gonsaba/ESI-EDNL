@@ -11,22 +11,21 @@ int main(){
     double inf = GrafoP<double>::INFINITO;
 
     Lista<pared> paredes;
-    pared p;
+    pared p1,p2;
 
-    for(int i = 0; i < n*n; ++i)
-        for(int j = i; j < n*n; ++j)
-            if(i != j+1 && i != j && i != j-1){
-                p.ori = i;
-                p.des = j;
-                if(i != 3 || j != 5)
-                    paredes.insertar(p,paredes.fin());  
-            }
+    p1.ori = 4;
+    p1.des = 5;
+    p2.ori = 2;
+    p2.des = 5;
+    paredes.insertar(p1,paredes.fin());
+    paredes.insertar(p2,paredes.fin());
 
-    Lista<unsigned int> l = resLaberinto(n,paredes,0,5);
+    Lista<casilla> l = resLaberinto(n,paredes,0,5);
 
-    Lista<unsigned int>::posicion pos = l.primera();
-    while(pos != l.fin()){
-        std::cout<<l.elemento(pos);
-        pos = pos->sig;
+    auto p = l.primera();
+
+    while(p != l.fin()){
+        std::cout<<l.elemento(p).fil<<" "<<l.elemento(p).col<<std::endl;
+        p = l.siguiente(p);
     }
 }

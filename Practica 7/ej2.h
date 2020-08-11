@@ -23,37 +23,47 @@ int casillaaNodo(casilla c, int n){
     return (c.fil * n) + c.col;
 }
 
+bool adyacente(casilla i,casilla j){
+    return ((abs(i.col - j.col) + abs(i.fil - j.fil)) == 1);
+}
 
-Lista<GrafoP<int>::vertice> resLaberinto(int n,Lista<pared> &paredes,GrafoP<int>::vertice o,GrafoP<int>::vertice d){
+Lista<casilla> resLaberinto(int n,Lista<pared> &paredes,GrafoP<int>::vertice o,GrafoP<int>::vertice d){
     GrafoP<int> G(n*n);
+    int inf = GrafoP<int>::INFINITO;
     for(int i = 0; i < n*n; ++i)
-        for(int j = 0; j < n*n; ++j)
-            G[i][j] = 1;
+        for(int j = i; j < n*n; ++j){
+            if(i==j){
+                G[i][j] = 0;
+            }
+            else if(adyacente(nodoaCasilla(i,n),nodoaCasilla(j,n))){
+                G[i][j] = 1;
+                G[j][i] = 1;
+            }
+            else{
+                G[i][j] = inf;
+                G[j][i] = inf;
+            }
+        }
     
-    Lista<pared>::posicion p = paredes.primera();
-    while(p != paredes.fin()){
-        G[paredes.elemento(p).ori][paredes.elemento(p).des] = GrafoP<int>::INFINITO;
-        G[paredes.elemento(p).des][paredes.elemento(p).ori] = GrafoP<int>::INFINITO;
-        p = paredes.siguiente(p);
+    Lista<pared>::posicion itp = paredes.primera();
+    while(itp != paredes.fin()){
+        G[paredes.elemento(itp).ori][paredes.elemento(itp).des] = GrafoP<int>::INFINITO;
+        G[paredes.elemento(itp).des][paredes.elemento(itp).ori] = GrafoP<int>::INFINITO;
+        itp = paredes.siguiente(itp);
     }
-
-    std::cout<< G << std::endl;
 
     matriz<GrafoP<int>::vertice> c;
     matriz<int> m = Floyd(G,c);
-     
-    std::cout<< m << std::endl;
 
-    auto cam = camino<int>(o,d,c);
-
-    Lista<int>::posicion p = cam.primera();
+    Lista<GrafoP<int>::vertice> l = camino<GrafoP<int>::vertice>(o,d,c);
 
     Lista<casilla> listaCasillas;
 
-    while(p != cam.fin()){
-        casilla c;
-        c = nodoaCasilla(cam.elemento(p),n);
-        listaCasillas.insertar(c,listaCasillas.fin());
+
+    auto pos = l.primera();
+    while(pos != l.fin()){
+        listaCasillas.insertar(nodoaCasilla(l.elemento(pos),n),listaCasillas.fin());
+        pos = l.siguiente(pos);
     }
 
     return listaCasillas;
