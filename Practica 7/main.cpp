@@ -2,30 +2,29 @@
 #include "../material/grafoPMC.h"
 #include "../material/alg_grafo_E-S.h"
 #include "../material/alg_grafoPMC.h"
-#include "ej1.h"
-#include "ej2.h"
+#include "ej3.h"
 
-int main(){
-    int n = 3;
-    
+int main(){    
+    GrafoP<double> G(5);
     double inf = GrafoP<double>::INFINITO;
+    vector<vector<double>> v = {
+        {0, 5, inf, inf, 8},
+        {inf, 0, 1, inf, 2},
+        {inf, 3, 0, inf, 3},
+        {8, inf, 1, 0, inf},
+        {8, inf, 7, 3, 0}
+    };
 
-    Lista<pared> paredes;
-    pared p1,p2;
+    for(int i = 0; i < G.numVert(); ++i)
+        G[i] = v[i];
 
-    p1.ori = 4;
-    p1.des = 5;
-    p2.ori = 2;
-    p2.des = 5;
-    paredes.insertar(p1,paredes.fin());
-    paredes.insertar(p2,paredes.fin());
+    vector<int> capacidades = {20,70,50,200,100};
+    
+    vector<double> porcentajes = {20,10,50,30,25};
 
-    Lista<casilla> l = resLaberinto(n,paredes,0,5);
+    vector<int> enviarCiudades = calcCamino(3,200,G,capacidades,porcentajes);
 
-    auto p = l.primera();
-
-    while(p != l.fin()){
-        std::cout<<l.elemento(p).fil<<" "<<l.elemento(p).col<<std::endl;
-        p = l.siguiente(p);
+    for(int i = 0; i < enviarCiudades.size(); ++i){
+        std::cout<< "Ciudad "<<i<<" Cantidad "<<enviarCiudades[i]<<std::endl;
     }
 }
