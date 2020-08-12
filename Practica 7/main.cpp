@@ -3,8 +3,13 @@
 #include "../material/alg_grafo_E-S.h"
 #include "../material/alg_grafoPMC.h"
 #include "ej3.h"
+#include "ej4.h"
 
 int main(){    
+    
+}
+
+void ej3(){
     GrafoP<double> G(5);
     double inf = GrafoP<double>::INFINITO;
     vector<vector<double>> v = {
