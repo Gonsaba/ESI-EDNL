@@ -20,7 +20,7 @@ vector<double> calckmCamiones(GrafoP<double> G,vector<parte> destinoCamion,Grafo
 
     for(int i = 0; i < destinoCamion.size();++i)
         while(destinoCamion[i].cargas > 0){
-            costesDestinoCamion[i] = costes[o][destinoCamion[i].destino];
+            costesDestinoCamion[i] = costes[capital][destinoCamion[i].destino];
             destinoCamion[i].cargas--;
         }
 

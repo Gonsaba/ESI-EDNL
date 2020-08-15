@@ -4,32 +4,48 @@
 #include "../material/alg_grafoPMC.h"
 #include "ej3.h"
 #include "ej4.h"
+#include "ej5.h"
 
 int main(){    
-    
-}
-
-void ej3(){
-    GrafoP<double> G(5);
+    GrafoP<double> G1(4);
+    GrafoP<double> G2(4);
+    GrafoP<double> G3(4);
     double inf = GrafoP<double>::INFINITO;
-    vector<vector<double>> v = {
-        {0, 5, inf, inf, 8},
-        {inf, 0, 1, inf, 2},
-        {inf, 3, 0, inf, 3},
-        {8, inf, 1, 0, inf},
-        {8, inf, 7, 3, 0}
+
+    vector<vector<double>> v1 = {
+        {0, inf, 5, 5},
+        {0, inf, 5, 5},
+        {0, inf, 5, 5},
+        {0, inf, 5, 5}
     };
 
-    for(int i = 0; i < G.numVert(); ++i)
-        G[i] = v[i];
+    vector<vector<double>> v2 = {
+        {0, inf, 5, 5},
+        {0, inf, 5, 5},
+        {0, inf, 5, 5},
+        {0, inf, 5, 5}
+    };
 
-    vector<int> capacidades = {20,70,50,200,100};
-    
-    vector<double> porcentajes = {20,10,50,30,25};
+    vector<vector<double>> v3 = {
+        {0, 5, 5, inf},
+        {0, 5, 5, 5},
+        {0, 5, 5, 5},
+        {0, 5, 5, 5}
+    };
 
-    vector<int> enviarCiudades = calcCamino(3,200,G,capacidades,porcentajes);
+    for(int i = 0; i < G1.numVert(); ++i)
+        G1[i] = v1[i];
 
-    for(int i = 0; i < enviarCiudades.size(); ++i){
-        std::cout<< "Ciudad "<<i<<" Cantidad "<<enviarCiudades[i]<<std::endl;
+    for(int i = 0; i < G2.numVert(); ++i)
+        G2[i] = v2[i];
+
+    for(int i = 0; i < G3.numVert(); ++i)
+        G3[i] = v2[i];
+
+    vector<int> l = ciudadesVisitables((double)200,G1,G2,G3,0,2);
+
+    for(int i = 0; i < l.size(); ++i){
+        std::cout<<l[i]<<" ";
     }
 }
+
