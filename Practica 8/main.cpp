@@ -2,10 +2,16 @@
 #include "grafoPMC.h"
 #include "alg_grafo_E-S.h"
 #include "alg_grafoPMC.h"
-#include "ej1.h"
+#include "particion.h"
+
+#include "ej2.h"
 
 int main(){
 
+    
+}
+/*
+void ej1(){
     int n = 4;
 
     vector<coordenadas> v = 
@@ -28,4 +34,4 @@ int main(){
         l.insertar(v[i],l.fin());
 
     distribucionTombuctu(m,v);
-}
+}*/
