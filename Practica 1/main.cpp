@@ -5,6 +5,7 @@
 #include "ej1.h"
 #include "ej2.h"
 #include "ej3.h"
+#include "ej6.h"
 
 typedef char T;
 
@@ -34,8 +35,12 @@ void ej3(Abin<T> A){
 	std::cout<<"Profundidad de "<<n->elto<<": "<<profNodoRecv2(A,n)<<std::endl;
 }
 
-void ej4(Abin<T> A){
+void ej45(Abin<T> A){
 	typename Abin<T>::nodo n = A.hijoIzqdo(A.hijoDrcho(A.hijoDrcho(A.hijoDrcho(A.raiz()))));
 	std::cout<<"Altura de "<<n->elto<<": "<<A.altura(n)<<std::endl;
 	std::cout<<"Profundidad de "<<n->elto<<": "<<A.profundidad(n)<<std::endl;
+}
+
+void ej6(Abin<T> A){
+	std::cout<<desequilibrioRec(A);
 }
