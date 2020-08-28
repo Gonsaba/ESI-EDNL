@@ -13,8 +13,8 @@ public:
 	void insertarRaiz(const T& e);
 	void insertarHijoIzqdo(nodo n, const T& e);
 	void insertarHijoDrcho(nodo n, const T& e);
-	void eliminarHijoIzqdo(nodo n, const T& e);
-	void eliminarHijoDrcho(nodo n, const T& e);
+	void eliminarHijoIzqdo(nodo n);
+	void eliminarHijoDrcho(nodo n);
 	void eliminarRaiz();
 	bool arbolVacio() const;
 	const T& elemento(nodo n) const; // acceso a elto, lectura
@@ -53,16 +53,16 @@ int Abin<T>::altura(Abin<T>::nodo n)
 	if(n == NODO_NULO)
 		return -1;
 	else
-		return std::max(1 + altura(n->hizq),1 + altura(n->hder));
+		return 1 + std::max(altura(n->hizq),altura(n->hder));
 }
 
 template <typename T>
 int Abin<T>::profundidad(Abin<T>::nodo n)
 {
-	if(n == r)
+	if(n->padre == NODO_NULO)
 		return 0;
 	else
-		return 1+profundidad(n->padre);
+		return 1 + profundidad(n->padre);
 }
 
 template <typename T>
