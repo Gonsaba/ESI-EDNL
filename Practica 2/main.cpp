@@ -5,6 +5,7 @@
 #include "ej1.h"
 #include "ej2.h"
 #include "ej3.h"
+#include "ej4.h"
 
 typedef char T;
 
@@ -56,26 +57,13 @@ void ej3(){
 	std::cout<<calcularArbol(A);
 }
 
-void construirArbolv2(Abin<T> &A,typename Abin<T>::nodo n,std::string s,int inicio,int fin){
-	int mitad = ((fin-inicio)/2)+inicio;
-	int mitadizq = (((mitad-1)-inicio)/2)+inicio;
-	int mitadder = ((fin-(mitad+1))/2)+(mitad+1);
-	if(s[mitadizq] != '-' && inicio < fin){
-		A.insertarHijoIzqdo(n,s[mitadizq]);
-		construirArbolv2(A,A.hijoIzqdo(n),s,inicio,mitad-1);
-	}
-	if(s[mitadder] != '-' && inicio < fin){
-		A.insertarHijoDrcho(n,s[mitadder]);
-		construirArbolv2(A,A.hijoDrcho(n),s,mitad+1,fin);
-	}
+void ej4(){
+	std::string s = "---n---afl-b-d-h-------m-c-j---";
+	imprimir(construirArbolv2(s));
 }
 
 int main ()
 {
-	Abin<T> A;
-	std::string s = "---n---afl-b-d-h-------m-c-j---";
-	A.insertarRaiz(s[s.size()/2]);
-	construirArbolv2(A,A.raiz(),s,0,s.size());
-	imprimir(A);
+	
 }
 
