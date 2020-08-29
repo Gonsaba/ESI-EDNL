@@ -10,15 +10,17 @@
 typedef char T;
 
 void ej1(){
+	std::cout<<"///EJ1///"<<std::endl;
     Agen<T> A;
 	std::ifstream fe("agen.dat"); // Abrir fichero de entrada.
 	rellenarAgen(fe, A); // Desde fichero.
 	fe.close();
 
-    std::cout<<gradoAgen(A);
+    std::cout<<gradoAgen(A)<<std::endl;
 }
 
 void ej2(){
+	std::cout<<"///EJ2///"<<std::endl;
     Agen<T> A;
 	std::ifstream fe("agen.dat"); // Abrir fichero de entrada.
 	rellenarAgen(fe, A); // Desde fichero.
@@ -29,23 +31,32 @@ void ej2(){
 }
 
 void ej3(){
+	std::cout<<"///EJ3///"<<std::endl;
 	Agen<T> A;
 	std::ifstream fe("agen.dat"); // Abrir fichero de entrada.
 	rellenarAgen(fe, A); // Desde fichero.
 	fe.close();
 
-	std::cout<<desequilibrioAgen(A);
+	std::cout<<desequilibrioAgen(A)<<std::endl;
 }
 
-int main(){
-    Agen<T> A;
+void ej4(){
+	std::cout<<"///EJ4///"<<std::endl;
+	Agen<T> A;
 	std::ifstream fe("agen.dat"); // Abrir fichero de entrada.
 	rellenarAgen(fe, A); // Desde fichero.
 	fe.close();
 
-	typename Agen<T>::nodo n = buscarNodo(A,'a',A.raiz());
-	if(n != Agen<T>::NODO_NULO)
-		std::cout<<A.elemento(n);
-	else
-		std::cout<<"nulo";
+	imprimirAgen(A);
+
+	podav1(A,'b');
+
+	imprimirAgen(A);
+}
+
+int main(){
+	ej1();
+	ej2();
+	ej3();
+	ej4();
 }
