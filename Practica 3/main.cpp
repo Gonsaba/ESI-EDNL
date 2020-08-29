@@ -4,6 +4,7 @@
 #include "agen_E-S.h"
 #include "ej1.h"
 #include "ej2.h"
+#include "ej3.h"
 
 typedef char T;
 
@@ -31,6 +32,5 @@ int main(){
 	std::ifstream fe("agen.dat"); // Abrir fichero de entrada.
 	rellenarAgen(fe, A); // Desde fichero.
 	fe.close();
-
-    
+	std::cout<<alturaNodo(A,A.hijoIzqdo(A.raiz()));
 }
