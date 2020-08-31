@@ -5,22 +5,26 @@
 
 typedef int T;
 
-void imprimirAbb(const Abb<T>& A)
+void imprimirAbbRec(const Abb<T>& A)
 {
 	if(!A.vacio())
 	{
-		//std::cout<<"\tRaiz: "<<A.elemento()<<std::endl;
 		if(!A.izqdo().vacio())
 		{
 			std::cout<<"Hijo izquierdo de "<<A.elemento()<<": "<<A.izqdo().elemento()<<std::endl;
-			imprimirAbb(A.izqdo());
+			imprimirAbbRec(A.izqdo());
 		}
 		if(!A.drcho().vacio())
 		{
 			std::cout<<"Hijo derecho de "<<A.elemento()<<": "<<A.drcho().elemento()<<std::endl;
-			imprimirAbb(A.drcho());
+			imprimirAbbRec(A.drcho());
 		}
 	}
+}
+
+void imprimirAbb(const Abb<T>& A){
+	std::cout<<"\tRaiz: "<<A.elemento()<<std::endl;
+	imprimirAbbRec(A);
 }
 
 void imprimirCola(Cola<T> &l)
