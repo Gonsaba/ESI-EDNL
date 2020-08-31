@@ -33,7 +33,8 @@ void vecInorden(const Abb<T> &A,std::vector<T> &vec){
 template<typename T>
 void generarArbol(Abb<T> &A,std::vector<T> vec,int inicio,int fin){
     int media = ((fin - inicio)/2) + inicio;
-    if(fin - inicio > 0){
+    int tam = vec.size();
+    if(fin - inicio >= 0 && media < vec.size()){
         A.insertar(vec[media]);
         generarArbol(A,vec,inicio,media-1);
         generarArbol(A,vec,media+1,fin);
