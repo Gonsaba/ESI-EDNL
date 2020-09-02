@@ -69,8 +69,8 @@ void ej4(){
 	imprimirAbb(A);
 }
 
-int main(){
-    Abb<T> A;
+void ej5(){
+	Abb<T> A;
 	T vec[] = {1,2,4,6,8,10};
 	unsigned tam = sizeof(vec)/sizeof(T);
 	for(unsigned i = 0; i < tam; ++i)
@@ -84,4 +84,12 @@ int main(){
 	
 	A = A*B;
 	imprimirAbb(A);
+}
+
+int main(){
+    ej1();
+	ej2();
+	ej3();
+	ej4();
+	ej5();
 }
