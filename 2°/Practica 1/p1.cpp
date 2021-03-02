@@ -5,6 +5,8 @@
 #include "ej1.h"
 #include "ej2.h"
 #include "ej3.h"
+#include "ej6.h"
+#include "ej7.h"
 
 typedef char T;
 const T fin = '#'; // Fin de lectura. int main
@@ -53,13 +55,30 @@ void ej3() {
     std::cout << "Profundidad de : " << calcProfRec(A, buscarNodo(A, 'd')) << std::endl;
 }
 
-int main () {    
+void ej6() {
     Abin<T> A;
-    std::ifstream fe("abin.dat"); // Abrir fichero de entrada.    
-    rellenarAbin(fe, A); // Desde fichero.
+    std::ifstream fe("abin.dat");
+    rellenarAbin(fe, A);
     fe.close();
+    std::cout << "Desequilibrio: " << desequilibrio(A) << std::endl;
+}
+
+void ej7() {
+    Abin<T> A;
+    std::ifstream fe("abin2.dat");
+    rellenarAbin(fe, A);
+    fe.close();
+    if(pseudocompleto(A))
+        std::cout << "Pseudocompleto" << std::endl;
+    else
+        std::cout << "No Pseudocompleto" << std::endl;
+}
+
+int main () {    
     ej1();
     ej2();
     ej3();
+    ej6();
+    ej7();
 }
 
