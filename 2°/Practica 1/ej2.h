@@ -6,7 +6,7 @@
 template<typename T>
 int calcAlturaRec(Abin<T> &A, typename Abin<T>::nodo n) {
     if(n == Abin<T>::NODO_NULO)
-        return 0;
+        return -1;
     else
         return 1 + std::max(calcAlturaRec(A, A.hijoIzqdo(n)), calcAlturaRec(A, A.hijoDrcho(n)));
 }

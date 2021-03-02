@@ -49,15 +49,18 @@ void ej2() {
 
 void ej3() {
     Abin<T> A;
+    char nodos[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l'};
     std::ifstream fe("abin.dat");
     rellenarAbin(fe, A);
     fe.close();
-    std::cout << "Profundidad de : " << calcProfRec(A, buscarNodo(A, 'd')) << std::endl;
+    for(int i = 0; i < sizeof(nodos); ++i)
+        std::cout << "Profundidad de " << nodos[i] << ": "
+            << calcProfRec(A, buscarNodo(A, nodos[i])) << std::endl;
 }
 
 void ej6() {
     Abin<T> A;
-    std::ifstream fe("abin.dat");
+    std::ifstream fe("abin3.dat");
     rellenarAbin(fe, A);
     fe.close();
     std::cout << "Desequilibrio: " << desequilibrio(A) << std::endl;
