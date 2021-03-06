@@ -11,6 +11,20 @@ using std::cin;
 using std::cout;
 using std::endl;
 
+// template <typename T>
+// ostream& operator<<(ostream& os, const T& t) {
+//    for(int i = 0; i < sizeof(t); ++i)
+//       os << t[i];
+//    return os;
+// }
+
+// template <typename T>
+// istream& operator<<(istream& i, T& t) {
+//    for(int i = 0; i < sizeof(t); ++i)
+//       i >> t[i];
+//    return i;
+// }
+
 template <typename T>
 void rellenarAbin(Abin<T>& A, const T& fin)
 // Pre: A está vacío.

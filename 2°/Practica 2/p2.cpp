@@ -1,9 +1,12 @@
 #include "abin.h"
 #include "abin_E-S.h"
+#include "string"
 #include "ej1.h"
 #include "ej2.h"
+#include "ej3.h"
 
 typedef char T;
+typedef std::string M;
 
 void ej1() {
     Abin<T> A, B;
@@ -27,7 +30,18 @@ void ej2() {
     imprimirAbin(abinRef(A));
 }
 
+void ej3() {
+    Abin<M> A;
+    std::ifstream fe("abinMath.dat");
+    rellenarAbin(fe, A);
+    fe.close();
+
+    imprimirAbin(A);
+    std::cout<< "Res: " << abinMathRes(A) << std::endl;
+}
+
 int main() {
     ej1();
     ej2();
+    ej3();
 }
