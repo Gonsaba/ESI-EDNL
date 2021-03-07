@@ -4,6 +4,7 @@
 #include "ej1.h"
 #include "ej2.h"
 #include "ej3.h"
+#include "cmath"
 
 typedef char T;
 typedef std::string M;
@@ -40,8 +41,44 @@ void ej3() {
     std::cout<< "Res: " << abinMathRes(A) << std::endl;
 }
 
-int main() {
-    ej1();
-    ej2();
-    ej3();
+void printVec(char *abin, int nodosMax)
+{
+    for (int i = 0; i < nodosMax; ++i)
+        std::cout<< abin[i] << ", ";
+    std::cout << std::endl;
+}
+
+void raiz(char* abin, int nodosMax) {
+    std::cout << abin[nodosMax / 2] << std::endl;
+}
+
+int hijoIzqdo(char* abin, int nodosMax, int n) {
+    int i = (n - (nodosMax + 1) / std::pow(2, 0 + 2));
+    std::cout << abin[i];
+    return i;
+}
+
+int hijoDrcho(char* abin, int nodosMax, int n) {
+    int i = (n + (nodosMax + 1) / std::pow(2, 0 + 2));
+    std::cout << abin[i];
+    return i;
+}
+
+void ej4() {
+    int n = 31;
+    char abin[] = { '-', '-', '-', 'n', '-', '-', '-', 'a', 'f', 'l', '-', 'b',
+                    '-', 'd', '-', 'h', '-', '-', '-', '-', '-', '-', '-', 'm',
+                    '-', 'c', '-', 'j', '-', '-', '-'};
+    printVec(abin, n);
+    raiz(abin, n);
+    hijoIzqdo(abin, n, n / 2);
+    hijoDrcho(abin, n, n / 2);
+}
+
+int main()
+{
+    // ej1();
+    // ej2();
+    // ej3();
+    ej4();
 }
