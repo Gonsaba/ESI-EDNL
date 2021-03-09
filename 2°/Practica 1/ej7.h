@@ -22,10 +22,6 @@ bool pseudocompletoRec(Abin<T> &A, typename Abin<T>::nodo n) {
             return pseudocompletoRec(A, A.hijoDrcho(n))
                 && pseudocompletoRec(A, A.hijoIzqdo(n));
     }
-
-    // else
-    //     return pseudocompletoRec(A, A.hijoDrcho(n)) 
-    //         && pseudocompletoRec(A, A.hijoIzqdo(n));
 }
 
 template<typename T>

@@ -14,6 +14,7 @@ float abinMathRes(Abin<std::string> &A)
 }
 
 float abinMathResRec(Abin<std::string> &A, typename Abin<std::string>::nodo n) {
+    //Comprobar solo si tiene hijo izquierdo
     if(n == Abin<std::string>::NODO_NULO) 
         return 0;
     else

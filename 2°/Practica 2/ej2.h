@@ -8,16 +8,7 @@ Abin<T> abinRef(Abin<T> &A) {
     if(A.raiz() != Abin<T>::NODO_NULO) 
     {
         B.insertarRaiz(A.elemento(A.raiz()));
-        if(A.hijoIzqdo(A.raiz()) != Abin<T>::NODO_NULO) 
-        {
-            B.insertarHijoDrcho(B.raiz(), A.elemento(A.hijoIzqdo(A.raiz())));
-            abinRefRec(A, A.hijoIzqdo(A.raiz()), B, B.hijoDrcho(B.raiz()));
-        }
-        if(A.hijoDrcho(A.raiz()) != Abin<T>::NODO_NULO) 
-        {
-            B.insertarHijoIzqdo(B.raiz(), A.elemento(A.hijoDrcho(A.raiz())));
-            abinRefRec(A, A.hijoDrcho(A.raiz()), B, B.hijoIzqdo(B.raiz()));
-        }
+        abinRefRec(A, A.raiz(), B, B.raiz());
     }
     return B;
 }
