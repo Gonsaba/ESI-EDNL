@@ -5,32 +5,44 @@
 #include "string"
 #include "cstdlib"
 
-float abinMathRes(Abin<std::string> &A);
-float abinMathResRec(Abin<std::string> &A, typename Abin<std::string>::nodo n);
+double abinMathRes(Abin<std::string> &A);
+double abinMathResRec(Abin<std::string> &A, typename Abin<std::string>::nodo n);
 
-float abinMathRes(Abin<std::string> &A)
+double abinMathRes(Abin<std::string> &A)
 {
     return abinMathResRec(A, A.raiz());
 }
 
-float abinMathResRec(Abin<std::string> &A, typename Abin<std::string>::nodo n) {
-    //Comprobar solo si tiene hijo izquierdo
-    if(n == Abin<std::string>::NODO_NULO) 
-        return 0;
+double abinMathResRec(Abin<std::string> &A, typename Abin<std::string>::nodo n) {
+    if(A.hijoIzqdo(n) == Abin<std::string>::NODO_NULO)
+        return std::stod(A.elemento(n));
     else
     {
-        float iz = abinMathResRec(A, A.hijoIzqdo(n));
-        float de = abinMathResRec(A, A.hijoDrcho(n));
-        if(A.elemento(n) == "+") 
-            return iz + de;
+        if(A.elemento(n) == "+")
+            return abinMathResRec(A, A.hijoIzqdo(n)) + abinMathResRec(A, A.hijoDrcho(n));
         else if(A.elemento(n) == "-") 
-            return iz - de;
+            return abinMathResRec(A, A.hijoIzqdo(n)) - abinMathResRec(A, A.hijoDrcho(n));
         else if(A.elemento(n) == "x") 
-            return iz * de;
-        else if(A.elemento(n) == "/") 
-            return iz / de;
-        else 
-            return std::stof(A.elemento(n));
+            return abinMathResRec(A, A.hijoIzqdo(n)) * abinMathResRec(A, A.hijoDrcho(n));
+        else //if(A.elemento(n) == "/") 
+            return abinMathResRec(A, A.hijoIzqdo(n)) / abinMathResRec(A, A.hijoDrcho(n));
+        // switch (A.elemento(n))
+        // {
+        // case "+":
+        //     return abinMathResRec(A, A.hijoIzqdo(n)) + abinMathResRec(A, A.hijoDrcho(n));
+        //     break;
+        // case "-":
+        //     return abinMathResRec(A, A.hijoIzqdo(n)) - abinMathResRec(A, A.hijoDrcho(n));
+        //     break;
+        // case "x":
+        //     return abinMathResRec(A, A.hijoIzqdo(n)) * abinMathResRec(A, A.hijoDrcho(n));
+        //     break;
+        // case "-":
+        //     return abinMathResRec(A, A.hijoIzqdo(n)) / abinMathResRec(A, A.hijoDrcho(n));
+        //     break;
+        // default:
+        //     break;
+        // }
     }
 }
 

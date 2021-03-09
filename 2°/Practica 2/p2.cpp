@@ -18,7 +18,7 @@ void ej1() {
     std::ifstream fe2("abin2.dat");
     rellenarAbin(fe2, B);
     fe2.close();
-    std::cout << "Iguales: " << std::boolalpha << abinIgual(A, B) << std::endl;
+    std::cout << "Iguales: " << std::boolalpha << abinIgual(A, A) << std::endl;
 }
 
 void ej2() {
@@ -41,44 +41,96 @@ void ej3() {
     std::cout<< "Res: " << abinMathRes(A) << std::endl;
 }
 
-void printVec(char *abin, int nodosMax)
+void printVec(char *A, int N)
 {
-    for (int i = 0; i < nodosMax; ++i)
-        std::cout<< abin[i] << ", ";
+    for (int i = 0; i < N; ++i)
+        std::cout<< A[i] << ", ";
     std::cout << std::endl;
 }
 
-void raiz(char* abin, int nodosMax) {
-    std::cout << abin[nodosMax / 2] << std::endl;
+int profNodo(char *A, int N, int n)
+{
+    int profindidad = 0;
+    int inicio = 0, fin = N - 1;
+    int medio = (fin - inicio) / 2;
+    while(medio >= 0 && medio != n){
+        if(medio < n)
+            inicio = medio + 1;
+        else                    
+            fin = medio - 1;
+
+        medio = (fin - inicio) / 2;
+        ++profindidad;
+    }
+    return profindidad;
 }
 
-int hijoIzqdo(char* abin, int nodosMax, int n) {
-    int i = (n - (nodosMax + 1) / std::pow(2, 0 + 2));
-    std::cout << abin[i];
+int raiz(char *A, int N)
+{
+    std::cout << A[N / 2] << std::endl;
+    return (N - 1) / 2;
+}
+
+int hijoIzqdo(char *A, int N, int n)
+{
+    int i = (n - (N + 1) / std::pow(2, profNodo(A, N, n) + 2));
+    std::cout << A[i] << std::endl;
     return i;
 }
 
-int hijoDrcho(char* abin, int nodosMax, int n) {
-    int i = (n + (nodosMax + 1) / std::pow(2, 0 + 2));
-    std::cout << abin[i];
+int hijoDrcho(char *A, int N, int n)
+{
+    int i = (n + (N + 1) / std::pow(2, profNodo(A, N, n) + 2));
+    std::cout << A[i] << std::endl;
     return i;
+}
+
+void insertarRaizB(char *A, int N, char e)
+{
+    A[(N - 1) / 2] = e;
+}
+
+void insertarHijoIzqdo(char *A, int N, int n, char e)
+{
+    int i = n - ((N + 1) / 
+    std::pow(2, profNodo(A, N, n) + 2));
+    std::cout << i << std::endl;
+    A[i] = e;
+}
+
+void insertarHijoDrcho(char *A, int N, int n, char e)
+{
+    int i = n + ((N + 1) / 
+    std::pow(2, profNodo(A, N, n) + 2));
+    std::cout << i << std::endl;
+    A[i] = e;
+}
+
+int padre(char *A, int N, int n)
+{
+    if(n)
 }
 
 void ej4() {
-    int n = 31;
-    char abin[] = { '-', '-', '-', 'n', '-', '-', '-', 'a', 'f', 'l', '-', 'b',
-                    '-', 'd', '-', 'h', '-', '-', '-', '-', '-', '-', '-', 'm',
-                    '-', 'c', '-', 'j', '-', '-', '-'};
-    printVec(abin, n);
-    raiz(abin, n);
-    hijoIzqdo(abin, n, n / 2);
-    hijoDrcho(abin, n, n / 2);
+    int N = 31;
+    char A[] = { '-', '-', '-', 'n', '-', '-', '-', 'a', 'f', 'l',
+                    '-', 'b', '-', 'd', '-', 'h', '-', '-', '-', '-',
+                    '-', '-', '-', 'm', '-', 'c', '-', 'j', '-', '-', '-'};
+    hijoIzqdo(A, N, hijoIzqdo(A, N, raiz(A, N)));
+    insertarRaizB(A, N, 'p');
+    insertarHijoIzqdo(A, N, raiz(A, N), 'x');
+    insertarHijoDrcho(A, N, raiz(A, N), 'x');
+    printVec(A, N);
+    // raiz(abin, n);
+    // hijoIzqdo(abin, n, n / 2);
+    // hijoDrcho(abin, n, n / 2);
+    // std::cout << profNodo(abin, 3, n) << std::endl; 
 }
 
 int main()
 {
     // ej1();
-    ej2();
+    // ej2();
     // ej3();
-    // ej4();
+    ej4();
 }

@@ -4,13 +4,7 @@
 
 template<typename T>
 bool abinIgual(Abin<T> &A, Abin<T> &B) {
-    if (A.raiz() == Abin<T>::NODO_NULO && B.raiz() == Abin<T>::NODO_NULO)
-        return true;
-    else if (A.raiz() == Abin<T>::NODO_NULO || B.raiz() == Abin<T>::NODO_NULO)
-        return false;
-    else
-        return abinIgualRec(A, A.hijoIzqdo(A.raiz()), B, B.hijoIzqdo(B.raiz())) 
-            && abinIgualRec(A, A.hijoDrcho(A.raiz()), B, B.hijoDrcho(B.raiz()));
+    return abinIgualRec(A, A.raiz(), B, B.raiz());
 }
 
 template <typename T>
