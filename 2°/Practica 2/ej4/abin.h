@@ -36,9 +36,9 @@ public:
 	// Abin<T>& operator =(const Abin<T>& A); // asig.de árboles
 	// int altura(nodo n);
 	int profundidad(nodo n) const;
-	// ~Abin(); // destructor
-private:
-	T* A;
+	int profundidad_rec(Abin<T>::nodo n, int inicio, int fin) const
+		// ~Abin(); // destructor
+		private : T *A;
 	bool* ocupado;
 	int N;
 	// struct celda {
@@ -73,18 +73,20 @@ int Abin<T>::profundidad(Abin<T>::nodo n) const
 {
 	int profindidad = 0;
 	int inicio = 0, fin = N - 1;
-	int medio = (fin - inicio) / 2;
-	while (medio >= 0 && medio != n)
-	{
-		if (medio < n)
-			inicio = medio + 1;
-		else
-			fin = medio - 1;
 
-		medio = (fin - inicio) / 2;
-		++profindidad;
-	}
 	return profindidad;
+}
+
+template <typename T>
+int Abin<T>::profundidad_rec(Abin<T>::nodo n, int inicio, int fin) const
+{
+	int medio = (inicio + fin) / 2
+	if (medio == n)
+		return 0;
+	else if (medio > n)
+		profundidad_rec(n, medio + 1, fin);
+	else 
+		profundidad_rec(n, medio + 1, medio - 1);
 }
 
 template <typename T>

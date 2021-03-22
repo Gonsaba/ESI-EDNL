@@ -1,0 +1,3 @@
+1. En vez de evaluacion aritmetica, sea lógica.
+2. Identificador en los nodos hoja. ej: hoja = A, A = 5 o T.
+3. Numero de nodos nostalgicos que estén en un arbol, nostalgico: mas antecesores propios que descendientes propios
