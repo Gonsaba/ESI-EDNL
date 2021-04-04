@@ -34,7 +34,7 @@ void ej3()
     std::ifstream fe("agen.dat");
     rellenarAgen(fe, A);
     fe.close();
-    std::cout << "Altura: " << altura(A, A.raiz()) << std::endl;
+    // std::cout << "Altura: " << altura(A, A.raiz()) << std::endl;
     std::cout << "Desequilibrio: " << desequilibrio(A) << std::endl;
 }
 

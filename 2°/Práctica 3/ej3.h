@@ -28,31 +28,25 @@ int desequilibrioRec(Agen<T> A, typename Agen<T>::nodo n)
     int max, min, alt, deseq, deseqMax;
     if(hijo != Agen<T>::NODO_NULO)
     {
-        max = altura(A, hijo);
+        max = 1 + altura(A, hijo);
         min = max;
         deseqMax = desequilibrioRec(A, hijo);
         hijo = A.hermDrcho(hijo);
         while (hijo != Agen<T>::NODO_NULO)
         {
-            alt = altura(A, hijo);
-
+            alt =  1 + altura(A, hijo);
             if(max < alt)
                 max = alt;
             if(alt < min)
                 min = alt;
 
             deseq = desequilibrioRec(A, hijo);
-
             if (deseqMax < deseq)
                 deseqMax = deseq;
 
             hijo = A.hermDrcho(hijo);
         }
-
-        if (deseqMax < (max - min))
-            return max - min;
-        else
-            return deseqMax;
+        return std::max(deseqMax, max - min);
     }
 }
 

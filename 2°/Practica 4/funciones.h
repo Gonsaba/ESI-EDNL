@@ -24,8 +24,15 @@ void imprimirAbbRec(const Abb<T>& A)
 template <typename T>
 void imprimirAbb(const Abb<T> &A)
 {
-	std::cout<<"\tRaiz: "<<A.elemento()<<std::endl;
-	imprimirAbbRec(A);
+	if (A.vacio())
+	{
+		std::cout << "Vacio" << std::endl;
+	}
+	else
+	{
+		std::cout << "\tRaiz: " << A.elemento() << std::endl;
+		imprimirAbbRec(A);
+	}
 }
 
 template <typename T>
