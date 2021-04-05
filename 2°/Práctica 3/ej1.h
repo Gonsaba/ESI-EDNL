@@ -1,6 +1,6 @@
 #ifndef EJ1_H_
 #define EJ1_H_
-#include "agenLis.h"
+#include "agen.h"
 
 template <typename T>
 int gradoRec(Agen<T> A, typename Agen<T>::nodo n)

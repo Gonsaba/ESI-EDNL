@@ -1,17 +1,18 @@
 #include <iostream>
 #include <fstream>
-#include "agenLis.h"
+#include "agen.h"
 #include "agen_E-S.h"
 #include "ej1.h"
 #include "ej2.h"
 #include "ej3.h"
+#include "ej4.h"
 
 typedef char T;
 
 const T fin = '#'; // fin de lectura 
 
 void ej1() {
-    Agen<T> A(16);
+    Agen<T> A;
     std::ifstream fe("agen.dat");
     rellenarAgen(fe, A);
     fe.close();
@@ -20,7 +21,7 @@ void ej1() {
 
 void ej2()
 {
-    Agen<T> A(16);
+    Agen<T> A;
     std::ifstream fe("agen.dat");
     rellenarAgen(fe, A);
     fe.close();
@@ -30,7 +31,7 @@ void ej2()
 
 void ej3()
 {
-    Agen<T> A(16);
+    Agen<T> A;
     std::ifstream fe("agen.dat");
     rellenarAgen(fe, A);
     fe.close();
@@ -38,8 +39,24 @@ void ej3()
     std::cout << "Desequilibrio: " << desequilibrio(A) << std::endl;
 }
 
+void ej4()
+{
+    Agen<T> A;
+    std::ifstream fe("agen.dat");
+    rellenarAgen(fe, A);
+    fe.close();
+    
+    poda(A, 'g');
+    imprimirAgen(A);
+    poda(A, 'n');
+    imprimirAgen(A);
+    poda(A, 'd');
+    imprimirAgen(A);
+}
+
 int main () {
-    ej1();
-    ej2();
-    ej3();
+    // ej1();
+    // ej2();
+    // ej3();
+    ej4();
 }
