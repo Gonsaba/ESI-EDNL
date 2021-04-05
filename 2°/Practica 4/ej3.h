@@ -6,60 +6,24 @@
 #include "ej2.h"
 
 template <typename T>
-void unionColas(Cola<T> &elA, Cola<T> &elB, Cola<T> &elementos, int &n)
+void unionAbb(Abb<T> &A,const Abb<T> &B)
 {
-    while (!elA.vacia() || !elB.vacia())
+    if(!B.vacio())
     {
-        if (!elA.vacia() && !elB.vacia())
-        {
-            if (elA.frente() == elB.frente())
-            {
-                elementos.push(elA.frente());
-                elA.pop();
-                elB.pop();
-                ++n;
-            }
-            else if (elA.frente() < elB.frente())
-            {
-                elementos.push(elA.frente());
-                elA.pop();
-                ++n;
-            }
-            else
-            {
-                elementos.push(elB.frente());
-                elB.pop();
-                ++n;
-            }
-        }
-        else
-        {
-            while (!elA.vacia())
-            {
-                elementos.push(elA.frente());
-                elA.pop();
-                ++n;
-            }
-            while (!elB.vacia())
-            {
-                elementos.push(elB.frente());
-                elB.pop();
-                ++n;
-            }
-        }
+        A.insertar(B.elemento());
+        unionAbb(A, B.izqdo());
+        unionAbb(A, B.drcho());
     }
 }
 
 template <typename T>
 Abb<T> unionEquilibrada(Abb<T> &A, Abb<T> &B)
 {
-    Abb<T> C;
+    Abb<T> C = A;
     Cola<T> elA, elB, elementos;
     int n = 0, n1, n2;
-    inorden(A, elA, n1);
-    inorden(B, elB, n2);
-    unionColas(elA, elB, elementos, n);
-    equilibrarAbbRec(C, elementos, n);
+    unionAbb(C, B);
+    equilibrarAbb(C);
     return C;
 }
 

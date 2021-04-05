@@ -2,6 +2,7 @@
 #define EJ1_H_
 #include "abb.h"
 
+//V1
 template <typename T>
 void eliminarSubarbol(Abb<T>& A, T a)
 {
@@ -14,6 +15,7 @@ void eliminarSubarbol(Abb<T>& A, T a)
     A.eliminar(a);
 }
 
+//V2
 template <typename T>
 void eliminarSubarbolRec(Abb<T> &A, T a)
 {
@@ -24,6 +26,13 @@ void eliminarSubarbolRec(Abb<T> &A, T a)
         eliminarSubarbolRec(A, A.buscar(a).drcho().elemento());
 
     A.eliminar(a);
+}
+
+//eliminar con destructor
+template <typename T>
+void eliminarSubarbolV3(Abb<T> &A, T a)
+{
+    A.buscar(a).~Abb();
 }
 
 #endif

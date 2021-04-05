@@ -56,12 +56,26 @@ Abb<T> operator-(Abb<T> &A, Abb<T> &B)
 }
 
 template <typename T>
+void insertarNoComunes(const Abb<T> &A, const Abb<T> &B, Abb<T> &C)
+{
+    if(!A.vacio())
+    {
+        if(B.buscar(A.elemento()).vacio())
+            C.insertar(A.elemento());
+        insertarNoComunes(A.izqdo(), B, C);
+        insertarNoComunes(A.drcho(), B, C);
+    }
+}
+
+template <typename T>
 Abb<T> operator*(Abb<T> &A, Abb<T> &B)
 {
-    Abb<T> C, D;
-    C = A | B;
-    D = A & B;
-    return C - D;
+    Abb<T> C;
+    insertarNoComunes(A, B, C);
+    insertarNoComunes(B, A, C);
+    // imprimirAbb(C);
+    // equilibrarAbb(C);
+    return C;
 }
 
 #endif

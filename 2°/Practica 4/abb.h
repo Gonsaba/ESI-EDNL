@@ -7,6 +7,7 @@ public:
 	const Abb& buscar(const T& e) const;
 	void insertar(const T& e);
 	void eliminar(const T& e);
+	void eliminarSubArbol(const T& e);
 	bool vacio() const;
 	const T& elemento() const;
 	const Abb& izqdo() const;
@@ -34,7 +35,13 @@ inline bool Abb<T>::vacio() const
 }
 
 template <typename T>
-const Abb<T>& Abb<T>::buscar(const T& e) const
+void Abb<T>::eliminarSubArbol(const T &e)
+{
+	this->buscar(e).~Abb();
+}
+
+template <typename T>
+const Abb<T> &Abb<T>::buscar(const T &e) const
 {
 	if (r == nullptr) // Árbol vacío, e no encontrado.
 	return *this;

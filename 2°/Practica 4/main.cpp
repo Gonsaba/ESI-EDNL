@@ -20,7 +20,7 @@ void ej1()
     int a = 9;
 
     imprimirAbb(A);
-    eliminarSubarbolRec(A, a);
+    A.eliminarSubArbol(a);
     imprimirAbb(A);
 }
 
@@ -71,8 +71,8 @@ void ej4()
 void ej5()
 {
     Abb<int> A, B;
-    int vec1[] = {7, 5, 12, 9, 17, 8, 11, 10};
-    int vec2[] = {2, 4, 6, 3, 1, 7, 5, 12, 9};
+    int vec1[] = {1, 2, 3};
+    int vec2[] = {2 , 3, 4};
     unsigned n1 = sizeof(vec1) / sizeof(int);
     unsigned n2 = sizeof(vec2) / sizeof(int);
     for (int i = 0; i < n1; ++i)

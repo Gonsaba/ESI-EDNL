@@ -6,21 +6,14 @@
 #include "ej2.h"
 
 template <typename T>
-void interseccionColas(Cola<T> &elA, Cola<T> &elB, Cola<T> &elementos, int &n)
+void interseccionAbb(const Abb<T> &A, const Abb<T> &B, Abb<T> &C)
 {
-    while (!elA.vacia() && !elB.vacia())
+    if(!B.vacio())
     {
-        if (elA.frente() == elB.frente())
-        {
-            elementos.push(elA.frente());
-            elA.pop();
-            elB.pop();
-            ++n;
-        }
-        else if (elA.frente() < elB.frente())
-            elA.pop();
-        else
-            elB.pop();
+        if(!A.buscar(B.elemento()).vacio())
+            C.insertar(B.elemento());
+        interseccionAbb(A, B.izqdo(), C);
+        interseccionAbb(A, B.drcho(), C);
     }
 }
 
@@ -28,12 +21,9 @@ template <typename T>
 Abb<T> interseccionEquilibrada(Abb<T> &A, Abb<T> &B)
 {
     Abb<T> C;
-    Cola<T> elA, elB, elementos;
-    int n = 0, n1, n2;
-    inorden(A, elA, n1);
-    inorden(B, elB, n2);
-    interseccionColas(elA, elB, elementos, n);
-    equilibrarAbbRec(C, elementos, n);
+    interseccionAbb(A, B, C);
+    if(!C.vacio())
+        equilibrarAbb(C);
     return C;
 }
 
