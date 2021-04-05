@@ -21,25 +21,47 @@ Abb<T> operator&(Abb<T> &A, Abb<T> &B)
 template <typename T>
 Abb<T> operator-(Abb<T> &A, Abb<T> &B)
 {
+    Abb<T> C;
     Cola<T> elementos, elA, elB;
     int na, nb, n = 0;
     inorden(A, elA, na);
     inorden(B, elB, nb);
-    while(!elA.vacia() || !elB.vacia())
+    while(!elA.vacia())
     {
-        if(elA.frente() == elB.frente())
+        if (!elB.vacia()) 
         {
-            elA.pop();
-            elB.pop();
+            if(elA.frente() == elB.frente())
+            {
+                elA.pop();
+                elB.pop();
+            }
+            else if(elA.frente() < elB.frente())
+            {
+                elementos.push(elA.frente());
+                ++n;
+                elA.pop();
+            }
+            else
+                elB.pop();
         }
-
+        else
+        {
+            elementos.push(elA.frente());
+            ++n;
+            elA.pop();
+        }
     }
+    equilibrarAbbRec(C, elementos, n);
+    return C;
 }
 
 template <typename T>
 Abb<T> operator*(Abb<T> &A, Abb<T> &B)
 {
-    return interseccionEquilibrada(A, B);
+    Abb<T> C, D;
+    C = A | B;
+    D = A & B;
+    return C - D;
 }
 
 #endif

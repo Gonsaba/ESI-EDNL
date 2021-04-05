@@ -80,8 +80,10 @@ void ej5()
     for (int i = 0; i < n2; ++i)
         B.insertar(vec2[i]);
 
-    imprimirAbb(A | B);
-    imprimirAbb(A & B);
+    // imprimirAbb(A | B);
+    // imprimirAbb(A & B);
+    // imprimirAbb(A - B);
+    imprimirAbb(A * B);
 }
 
 int main() 
