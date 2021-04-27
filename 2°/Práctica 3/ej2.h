@@ -7,10 +7,7 @@ template <typename T>
 int profundidadRec(Agen<T> A, typename Agen<T>::nodo n)
 {
     if(n != Agen<T>::NODO_NULO)
-    {
         return 1 + profundidadRec(A, A.padre(n));
-        // std::cout<< A.elemento(n)<<std::endl;
-    }
     else
         return -1;
 }

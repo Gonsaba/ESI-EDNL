@@ -1,3 +1,6 @@
 1. En vez de evaluacion aritmetica, sea lógica.
 2. Identificador en los nodos hoja. ej: hoja = A, A = 5 o T.
 3. Numero de nodos nostalgicos que estén en un arbol, nostalgico: mas antecesores propios que descendientes propios
+
+4. Nodos nostalgicos, nodos con mas pasado que futuro
+5. Nodos prosperos, su contenido es mayor o igual que el de todos sus ancestros y menos o igual que sus descendientes
