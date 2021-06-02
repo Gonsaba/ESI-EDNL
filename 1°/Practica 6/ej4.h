@@ -9,7 +9,8 @@ typedef struct
     GrafoP<double>::vertice cB;
 } caminos;
 
-matriz<double> costeZuelandia(GrafoP<double> &G,vector<bool> &ciudadesR,vector<caminos> &caminoR, GrafoP<double>::vertice cap){
+matriz<double> costeZuelandia(GrafoP<double> &G, vector<bool> &ciudadesR
+    , vector<caminos> &caminoR, GrafoP<double>::vertice cap){
     matriz<double> costes;
     matriz<GrafoP<double>::vertice> c;
     
@@ -20,7 +21,8 @@ matriz<double> costeZuelandia(GrafoP<double> &G,vector<bool> &ciudadesR,vector<c
     }
 
     for(int i = 0; i < caminoR.size(); ++i){
-        G[caminoR[i].cA][caminoR[i].cB] = G[caminoR[i].cB][caminoR[i].cA] = GrafoP<double>::INFINITO;
+        G[caminoR[i].cA][caminoR[i].cB] = G[caminoR[i].cB][caminoR[i].cA] 
+            = GrafoP<double>::INFINITO;
     }
 
     costes = Floyd(G,c);

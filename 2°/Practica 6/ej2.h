@@ -7,10 +7,10 @@ template <typename T>
 T  diametroGrafo(GrafoP<T> G)
 {
     typedef typename GrafoP<T>::vertice vertice;
-    matriz<vertice> camino;
+    matriz<vertice> P;
     vertice a, b, pseudocentro, v;
     T ca, cb, diametro;
-    matriz<T> m = Floyd(G, camino);
+    matriz<T> m = Floyd(G, P);
 
     diametro = GrafoP<T>::INFINITO;
     ca = cb = 0;
@@ -19,7 +19,7 @@ T  diametroGrafo(GrafoP<T> G)
     {
         for(v = 0; v < G.numVert(); ++v)
         {
-            if(ca < m[pseudocentro][v])
+            if (m[pseudocentro][v] < GrafoP<double>::INFINITO && ca < m[pseudocentro][v])
             {
                 cb = ca;
                 ca = m[pseudocentro][v];
