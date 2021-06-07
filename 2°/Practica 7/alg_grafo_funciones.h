@@ -13,7 +13,7 @@ void printMatrix(matriz<T> m)
             if (m[i][j] < 100000)
                 std::cout << m[i][j] << " ";
             else
-                std::cout << "inf" << " ";
+                std::cout << "-" << " ";
         std::cout << std::endl;
     }
 }
@@ -30,6 +30,14 @@ void printGrafo(GrafoP<T> G)
                 std::cout << "-" << " ";
         std::cout << std::endl;
     }
+}
+
+template <typename T>
+void printVector(vector<T> v)
+{
+    for (int i = 0; i < v.size(); i++)
+        std::cout << v[i] << " ";
+    std::cout << std::endl;
 }
 
 #endif
