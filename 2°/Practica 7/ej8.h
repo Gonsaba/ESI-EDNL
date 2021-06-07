@@ -1,5 +1,5 @@
-#ifndef EJ6_H_
-#define EJ6_H_
+#ifndef EJ8_H_
+#define EJ8_H_
 #include "iostream"
 #include "grafoPMC.h"
 #include "alg_grafo_E-S.h"
@@ -8,9 +8,8 @@
 
 typedef GrafoP<double>::vertice vertice;
 
-
 template <typename T>
-matriz<T> costesMinimos(GrafoP<T> bus, GrafoP<T> tren,int ciudadTrasbordo)
+matriz<T> costesMinimos(GrafoP<T> bus, GrafoP<T> tren, int ciudadTrasbordo)
 {
     int n = bus.numVert();
     matriz<vertice> P;
@@ -37,7 +36,7 @@ matriz<T> costesMinimos(GrafoP<T> bus, GrafoP<T> tren,int ciudadTrasbordo)
     for (int i = 0; i < n; ++i)
         for (int j = 0; j < n; ++j)
             res[i][j] = std::min(costeBus[i][j], std::min(costeTren[i][j],
-             std::min(trasbordoBusTren[i][j], trasbordoTrenBus[i][j])));
+                                                          std::min(trasbordoBusTren[i][j], trasbordoTrenBus[i][j])));
 
     return res;
 }

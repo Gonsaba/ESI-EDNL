@@ -10,6 +10,7 @@
 #include "ej5.h"
 #include "ej6.h"
 #include "ej7.h"
+#include "ej8.h"
 
 typedef GrafoP<double>::vertice Vertice;
 typedef vector<Vertice> Camino;
@@ -95,8 +96,24 @@ void ej6()
 
 void ej7()
 {
+    GrafoP<double> bus("grafoej7bus.dat");
+    GrafoP<double> tren("grafoej7tren.dat");
+    ViajeDosTrasbordos viaje = viajeCosteMinimo(0, 5, 4, 6, tren, bus);
+
+    std::cout << viaje.coste << std::endl;
+    printVector(viaje.camino);
+}
+
+void ej6()
+{
     GrafoP<double> bus("grafoej5carretera.dat");
     GrafoP<double> tren("grafoej5tren.dat");
+    vector<bool> puedeTrasbordo = 
+        {true, false, false, true, false, false, false};
+    matriz<double> costesMinimosTransporte = 
+        costesMinimos(bus, tren, puedeTrasbordo);
+
+    printMatrix(costesMinimosTransporte);
 }
 
 int main()
@@ -107,5 +124,5 @@ int main()
     // ej4();
     // ej5();
     // ej6();
-    ej7();
+    // ej7();
 }
