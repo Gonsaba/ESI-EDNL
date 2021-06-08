@@ -104,16 +104,25 @@ void ej7()
     printVector(viaje.camino);
 }
 
-void ej6()
+void ej8()
 {
-    GrafoP<double> bus("grafoej5carretera.dat");
-    GrafoP<double> tren("grafoej5tren.dat");
-    vector<bool> puedeTrasbordo = 
-        {true, false, false, true, false, false, false};
-    matriz<double> costesMinimosTransporte = 
-        costesMinimos(bus, tren, puedeTrasbordo);
+    GrafoP<double> bus("grafoej8bus.dat");
+    GrafoP<double> tren("grafoej7tren.dat");
+    vector<bool> puedeTrasbordo{
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        true
+    };
 
-    printMatrix(costesMinimosTransporte);
+    ViajeEj8 viaje = costesMinimos(bus, tren, puedeTrasbordo, 0, 5);
+
+    std::cout << "Coste: " << viaje.coste << std::endl;
+    std::cout << "Medio Inicial: " << viaje.medioInicial << std::endl;
+    std::cout << "Trasbordo: " << viaje.ciudadTrasbordo << std::endl;
 }
 
 int main()
@@ -125,4 +134,5 @@ int main()
     // ej5();
     // ej6();
     // ej7();
+    ej8();
 }

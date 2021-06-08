@@ -8,37 +8,70 @@
 
 typedef GrafoP<double>::vertice vertice;
 
+enum medio {EJ8BUS, EJ8TREN};
+
+struct ViajeEj8{
+    double coste;
+    int medioInicial;
+    int ciudadTrasbordo;
+};
+
 template <typename T>
-matriz<T> costesMinimos(GrafoP<T> bus, GrafoP<T> tren, int ciudadTrasbordo)
+ViajeEj8 costesMinimos(GrafoP<T> bus, GrafoP<T> tren, vector<bool> puedeTrasbordo, int origen, int destino)
 {
+    ViajeEj8 viajeMin;
     int n = bus.numVert();
-    matriz<vertice> P;
-    GrafoP<T> trasbordoBusTren(n), trasbordoTrenBus(n);
-    matriz<T> costeBus, costeTren, costeTrasbordoBusTren, costeTrasbordoTrenBus, res;
+    vector<vertice> P;
+    vector<T> costeTren, costeBus;
+    T costeBusTren, costeTrenBus;
 
-    res = matriz<T>(n);
-    trasbordoBusTren = bus;
-    trasbordoTrenBus = tren;
+    viajeMin.coste = GrafoP<T>::INFINITO;
+    viajeMin.medioInicial = -1;
+    viajeMin.ciudadTrasbordo = -1;
 
-    trasbordoBusTren[ciudadTrasbordo] = tren[ciudadTrasbordo];
-    trasbordoTrenBus[ciudadTrasbordo] = bus[ciudadTrasbordo];
+    costeBus = Dijkstra(bus, origen, P);
+    costeTren = Dijkstra(tren, origen, P);
 
-    for (int i = 0; i < n; ++i)
-        trasbordoBusTren[i][ciudadTrasbordo] = tren[i][ciudadTrasbordo];
-    for (int i = 0; i < n; ++i)
-        trasbordoTrenBus[i][ciudadTrasbordo] = bus[i][ciudadTrasbordo];
+    printVector(costeBus);
+    printVector(costeTren);
 
-    costeBus = Floyd(bus, P);
-    costeTren = Floyd(tren, P);
-    costeTrasbordoBusTren = Floyd(trasbordoBusTren, P);
-    costeTrasbordoTrenBus = Floyd(trasbordoTrenBus, P);
+    if (costeBus[destino] < costeTren[destino])
+    {
+        viajeMin.coste = costeBus[destino];
+        viajeMin.medioInicial = EJ8BUS;
+    }
+    else
+    {
+        viajeMin.coste = costeTren[destino];
+        viajeMin.medioInicial = EJ8TREN;
+    }
 
-    for (int i = 0; i < n; ++i)
-        for (int j = 0; j < n; ++j)
-            res[i][j] = std::min(costeBus[i][j], std::min(costeTren[i][j],
-                                                          std::min(trasbordoBusTren[i][j], trasbordoTrenBus[i][j])));
+    for (int ciudad = 0; ciudad < puedeTrasbordo.size(); ++ciudad)
+    {
+        if (ciudad != origen && ciudad != destino
+            && puedeTrasbordo[ciudad])
+        {
+            costeBusTren = Dijkstra(bus, origen, P)[ciudad] +
+                        Dijkstra(tren, ciudad, P)[destino];
+            costeTrenBus = Dijkstra(tren, origen, P)[ciudad] +
+                        Dijkstra(bus, ciudad, P)[destino];
 
-    return res;
+            if (costeBusTren < viajeMin.coste)
+            {
+                viajeMin.coste = costeBusTren;
+                viajeMin.medioInicial = EJ8BUS;
+                viajeMin.ciudadTrasbordo = ciudad;
+            }
+            if (costeTrenBus < viajeMin.coste)
+            {
+                viajeMin.coste = costeTrenBus;
+                viajeMin.medioInicial = EJ8TREN;
+                viajeMin.ciudadTrasbordo = ciudad;
+            }
+        }
+    }
+
+    return viajeMin;
 }
 
 #endif
