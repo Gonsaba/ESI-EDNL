@@ -11,6 +11,7 @@
 #include "ej6.h"
 #include "ej7.h"
 #include "ej8.h"
+#include "ej9.h"
 
 typedef GrafoP<double>::vertice Vertice;
 typedef vector<Vertice> Camino;
@@ -125,6 +126,16 @@ void ej8()
     std::cout << "Trasbordo: " << viaje.ciudadTrasbordo << std::endl;
 }
 
+void ej9()
+{
+    ViajeEj9 viaje;
+    GrafoP<double> bus ("grafoej9bus.dat"), tren("grafoej9tren.dat");
+    viaje = costeMin(bus, tren, 0, 5,(double) 15);
+    std::cout << "Coste: " << viaje.coste << std::endl;
+    printVector(viaje.camino1);
+    printVector(viaje.camino2);
+}
+
 int main()
 {
     // ej1();
@@ -134,5 +145,6 @@ int main()
     // ej5();
     // ej6();
     // ej7();
-    ej8();
+    // ej8();
+    ej9();
 }
