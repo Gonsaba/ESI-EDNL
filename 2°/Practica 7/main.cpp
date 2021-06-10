@@ -12,6 +12,7 @@
 #include "ej7.h"
 #include "ej8.h"
 #include "ej9.h"
+#include "ej10.h"
 
 typedef GrafoP<double>::vertice Vertice;
 typedef vector<Vertice> Camino;
@@ -136,6 +137,14 @@ void ej9()
     printVector(viaje.camino2);
 }
 
+void ej10()
+{
+    GrafoP<double> bus("grafoej9bus.dat"), tren("grafoej9tren.dat"), 
+        avion("grafoej5avion.dat");
+
+    viajeCosteMinimo(bus, tren, avion, 0, 5, 15, 20);
+}
+
 int main()
 {
     // ej1();
@@ -146,5 +155,6 @@ int main()
     // ej6();
     // ej7();
     // ej8();
-    ej9();
+    // ej9();
+    ej10();
 }
