@@ -22,7 +22,6 @@ ViajeEj9 costeMin(GrafoP<T> bus, GrafoP<T> tren, int origen, int destino,
     GrafoP<T> GBusTren(n * 2);
     vector<T> costes1, costes2;
     vector<Vertice> P1, P2;
-    matriz<Vertice> Pborrar;
 
     for (int i = 0; i < n * 2; ++i)
         for (int j = 0; j < n * 2; ++j)
@@ -34,8 +33,6 @@ ViajeEj9 costeMin(GrafoP<T> bus, GrafoP<T> tren, int origen, int destino,
                 GBusTren[i][j] = tren[i][j % n] + costeTaxi;
             else
                 GBusTren[i][j] = bus[i % n][j] + costeTaxi;
-
-    printGrafo(GBusTren);
 
     costes1 = Dijkstra(GBusTren, origen, P1);
     costes2 = Dijkstra(GBusTren, origen + n, P2);
@@ -51,10 +48,10 @@ ViajeEj9 costeMin(GrafoP<T> bus, GrafoP<T> tren, int origen, int destino,
     viajeMin.camino1 = P1;
     viajeMin.camino2 = P2;
 
-    std::cout << costes1[destino] << std::endl;
-    std::cout << costes1[destino + n] << std::endl;
-    std::cout << costes2[destino] << std::endl;
-    std::cout << costes2[destino + n] << std::endl;
+    // std::cout << costes1[destino] << std::endl;
+    // std::cout << costes1[destino + n] << std::endl;
+    // std::cout << costes2[destino] << std::endl;
+    // std::cout << costes2[destino + n] << std::endl;
 
     return viajeMin;
 }

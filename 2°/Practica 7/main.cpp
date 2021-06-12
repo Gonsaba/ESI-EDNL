@@ -13,6 +13,9 @@
 #include "ej8.h"
 #include "ej9.h"
 #include "ej10.h"
+#include "ej11.h"
+#include "ej12.h"
+#include "ej13.h"
 
 typedef GrafoP<double>::vertice Vertice;
 typedef vector<Vertice> Camino;
@@ -132,6 +135,7 @@ void ej9()
     ViajeEj9 viaje;
     GrafoP<double> bus ("grafoej9bus.dat"), tren("grafoej9tren.dat");
     viaje = costeMin(bus, tren, 0, 5,(double) 15);
+
     std::cout << "Coste: " << viaje.coste << std::endl;
     printVector(viaje.camino1);
     printVector(viaje.camino2);
@@ -139,10 +143,52 @@ void ej9()
 
 void ej10()
 {
+    ViajeEj10 viaje;
     GrafoP<double> bus("grafoej9bus.dat"), tren("grafoej9tren.dat"), 
         avion("grafoej5avion.dat");
+    viaje = viajeCosteMinimo(bus, tren, avion, 0, 5, 15, 20);
 
-    viajeCosteMinimo(bus, tren, avion, 0, 5, 15, 20);
+    std::cout << "Coste: " << viaje.coste << std::endl;
+    printVector(viaje.camino1);
+    printVector(viaje.camino2);
+    printVector(viaje.camino3);
+}
+
+void ej11()
+{
+    matriz<double> m;
+    GrafoP<double> isla1("grafoej11isla1.dat"), isla2("grafoej11isla2.dat"),
+        isla3("grafoej11isla3.dat");
+    vector<Puente> puente{Puente(0, 0, 0, 2), Puente(2, 2, 1, 2), Puente(1, 3, 0, 1)};
+    m = costesMinimosZuelandia(isla1, isla2, isla3, puente);
+
+    printMatrix(m);
+}
+
+void ej12()
+{
+    GrafoP<double> GFobos("grafofobos.dat"), GDeimos("grafodeimos.dat");
+    vector<Ciudad> costFobos {5, 3, 2, 0}, costDeimos {2, 3, 5, 6};
+    PuenteEj12 puente = puenteZuelandia(GFobos, GDeimos, costFobos, costDeimos);
+
+    std::cout << "Puente" << std::endl;
+    std::cout << "Isla " << puente.isla1 << " Ciudad: " << puente.c1 << std::endl;
+    std::cout << "Isla " << puente.isla2 << " Ciudad: " << puente.c2 << std::endl;
+}
+
+void ej13()
+{
+    GrafoP<double> G1("grafofobos.dat"), G2("grafodeimos.dat"), G3("grafoisla3ej13.dat");
+    vector<Ciudad> costa1{5, 3, 2, 0}, costa2{2, 3, 5, 6}, costa3{0, 2, 3, 4};
+    vector<PuenteEj13> puentes = puentesHuries(G1, G2, G3, costa1, costa2, costa3);
+
+    for (int i = 0; i < puentes.size(); ++i)
+    {
+        std::cout << "Puente" << std::endl;
+        std::cout << "Isla " << puentes[i].isla1 << " Ciudad: " << puentes[i].c1 << std::endl;
+        std::cout << "Isla " << puentes[i].isla2 << " Ciudad: " << puentes[i].c2 << std::endl;
+    }
+    
 }
 
 int main()
@@ -156,5 +202,8 @@ int main()
     // ej7();
     // ej8();
     // ej9();
-    ej10();
+    // ej10();
+    // ej11();
+    // ej12();
+    ej13();
 }
