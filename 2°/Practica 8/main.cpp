@@ -70,33 +70,39 @@ void ej3()
 void ej4()
 {
     GrafoP<double> G("grafoej4.dat");
-    printGrafo(G);
-    std::cout << GrafoP<double>::INFINITO << std::endl;
     printGrafo(canalesEmasajer(G));
 }
 
 void ej5()
 {
-
-}
+    GrafoP<double> G("grafoej4.dat");
+    std::cout << "Longitud Minima: " << telefoniaReteuni3(G) << std::endl;
+}   
 
 void ej6()
 {
+    GrafoP<double> G("grafoej4.dat");
+    GrafoP<double> G2("grafoej4.dat");
 
+    printGrafo(redCanalesEmasajer(G, G2, 10, 18));
 }
 
 void ej7()
 {
-
-}
+    vector<Coordenadas> fobos{Coordenadas(0, 1), Coordenadas(3, 7), Coordenadas(6, 10), Coordenadas(5, 2)};
+    vector<Coordenadas> deimos{Coordenadas(8, 11), Coordenadas(15, 11), Coordenadas(14, 19)};
+    vector<Ciudad> costFobos{1, 3};
+    vector<Ciudad> costDeimos{0, 2};
+    std::cout << "Precio: " << costeViajeGrecoland(fobos, deimos, costFobos, costDeimos, 0, 5);
+}   
 
 int main()
 {
     // ej1();
     // ej2();
     // ej3();
-    ej4();
+    // ej4();
     // ej5();
     // ej6();
-    // ej7();
+    ej7();
 }

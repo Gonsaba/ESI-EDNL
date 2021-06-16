@@ -76,7 +76,7 @@ Funciones:
 // Suma de costes (Dijkstra y Floyd)
 template <typename tCoste> tCoste suma(tCoste x, tCoste y)
 {
-   const tCoste INFINITO = GrafoP<tCoste>::INFINITO;
+   const tCoste INFINITO = 10000;
    if (x == INFINITO || y == INFINITO)
       return INFINITO;
    else
